@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:device_preview/device_preview.dart';
 import 'Fragment/EmailFragment.dart';
 import 'Fragment/HomeFragment.dart';
 import 'Fragment/SearchFragment.dart';
@@ -8,7 +8,10 @@ import 'Screen/home.dart';
 import 'Screen/profile.dart';
 
 main() {
-  runApp(const MyApp());
+  runApp(DevicePreview(
+    enabled: false,
+    builder: (context) => const MyApp(), // Wrap your app
+  ),);
 }
 
 class MyApp extends StatelessWidget {
@@ -19,6 +22,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
 
     return MaterialApp(
+        useInheritedMediaQuery: true,
+        locale: DevicePreview.locale(context),
+        builder: DevicePreview.appBuilder,
         theme: ThemeData(primarySwatch: Colors.green),
         darkTheme: ThemeData(primarySwatch: Colors.amber),
         color: Colors.blue,
