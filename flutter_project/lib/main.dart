@@ -7,7 +7,7 @@ import 'Fragment/SettingsFragment.dart';
 import 'Screen/home.dart';
 import 'Screen/profile.dart';
 
-main() {
+void main() {
   runApp(DevicePreview(
     enabled: false,
     builder: (context) => const MyApp(), // Wrap your app
@@ -22,20 +22,19 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
 
     return MaterialApp(
-        useInheritedMediaQuery: true,
         locale: DevicePreview.locale(context),
         builder: DevicePreview.appBuilder,
         theme: ThemeData(primarySwatch: Colors.green),
         darkTheme: ThemeData(primarySwatch: Colors.amber),
         color: Colors.blue,
         debugShowCheckedModeBanner: false,
-        home: HomeActivity()
+        home: const HomeActivity()
     );
   }
 }
 
 class HomeActivity extends StatefulWidget {
-  HomeActivity({super.key});
+  const HomeActivity({super.key});
 
   @override
   State<HomeActivity> createState() => _HomeActivityState();
@@ -69,7 +68,7 @@ class _HomeActivityState extends State<HomeActivity> {
     child:  Scaffold(
 
       appBar: AppBar(
-        title: Text("MyApp"),
+        title: const Text("MyApp"),
         titleSpacing: 0,
         centerTitle: true,
         toolbarHeight: 60,
@@ -77,12 +76,12 @@ class _HomeActivityState extends State<HomeActivity> {
         elevation: 0,
         backgroundColor: Colors.greenAccent,
         actions: [
-          IconButton(onPressed: (){MySnackBar("Comments", context);}, icon: Icon(Icons.comment),),
-          IconButton(onPressed: (){MySnackBar("Search", context);}, icon: Icon(Icons.search),),
-          IconButton(onPressed: (){MySnackBar("Settings", context);}, icon: Icon(Icons.settings),),
-          IconButton(onPressed: (){MySnackBar("Email", context);}, icon: Icon(Icons.email),)
+          IconButton(onPressed: (){MySnackBar("Comments", context);}, icon: const Icon(Icons.comment),),
+          IconButton(onPressed: (){MySnackBar("Search", context);}, icon: const Icon(Icons.search),),
+          IconButton(onPressed: (){MySnackBar("Settings", context);}, icon: const Icon(Icons.settings),),
+          IconButton(onPressed: (){MySnackBar("Email", context);}, icon: const Icon(Icons.email),)
         ],
-        bottom: TabBar(
+        bottom: const TabBar(
           isScrollable: true,
           tabs: [
             Tab(icon: Icon(Icons.home), text: 'Home',),
@@ -100,7 +99,7 @@ class _HomeActivityState extends State<HomeActivity> {
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.greenAccent,
         elevation: 10,
-        child: Icon(Icons.add),
+        child: const Icon(Icons.add),
         onPressed: () {
           MySnackBar("Floating Action Button", context);
         },
@@ -108,7 +107,7 @@ class _HomeActivityState extends State<HomeActivity> {
 
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: 1,
-        items: [
+        items: const [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
           BottomNavigationBarItem(icon: Icon(Icons.person), label: "Profile"),
           BottomNavigationBarItem(icon: Icon(Icons.message), label: "Contact")
@@ -136,32 +135,32 @@ class _HomeActivityState extends State<HomeActivity> {
             DrawerHeader(
               padding: const EdgeInsets.all(0),
               child: UserAccountsDrawerHeader(
-                decoration: BoxDecoration(color: Colors.blueGrey),
+                decoration: const BoxDecoration(color: Colors.blueGrey),
                 currentAccountPicture: Image.asset('assets/Untitled-1.jpg'),
                 accountName: const Text("Sajjadur Rahman Sakib"),
-                accountEmail: Text("sakib.x@icloud.com"),
+                accountEmail: const Text("sakib.x@icloud.com"),
 
                 onDetailsPressed: (){MySnackBar("This is Profile", context);},
               )
             ),
             ListTile(
-              leading: Icon(Icons.home),
-              title: Text("Home"),
+              leading: const Icon(Icons.home),
+              title: const Text("Home"),
               onTap: (){MySnackBar("Home", context);},
             ),
             ListTile(
-              leading: Icon(Icons.person),
-              title: Text("Profile"),
+              leading: const Icon(Icons.person),
+              title: const Text("Profile"),
               onTap: (){MySnackBar("Home", context);},
             ),
             ListTile(
-              leading: Icon(Icons.phone),
-              title: Text("Contact"),
+              leading: const Icon(Icons.phone),
+              title: const Text("Contact"),
               onTap: (){MySnackBar("Home", context);},
             ),
             ListTile(
-              leading: Icon(Icons.email),
-              title: Text("Email"),
+              leading: const Icon(Icons.email),
+              title: const Text("Email"),
               onTap: (){MySnackBar("Home", context);},
             ),
           ],
@@ -173,11 +172,11 @@ class _HomeActivityState extends State<HomeActivity> {
         child: ListView(
           children: [
             DrawerHeader(
-                padding: EdgeInsets.all(0),
+                padding: const EdgeInsets.all(0),
                 child: UserAccountsDrawerHeader(
-                  decoration: BoxDecoration(color: Colors.blueGrey),
-                  accountName: Text("Sajjadur Rahman Sakib"),
-                  accountEmail: Text("sakib.x@icloud.com"),
+                  decoration: const BoxDecoration(color: Colors.blueGrey),
+                  accountName: const Text("Sajjadur Rahman Sakib"),
+                  accountEmail: const Text("sakib.x@icloud.com"),
                   currentAccountPicture: Image.network("https://i.postimg.cc/QdhRTZK6/IMG-20230111-175746.jpg"),
                   onDetailsPressed: (){MySnackBar("This is Profile", context);},
                 )
@@ -188,18 +187,18 @@ class _HomeActivityState extends State<HomeActivity> {
               onTap: (){MySnackBar("Home", context);},
             ),
             ListTile(
-              leading: Icon(Icons.person),
-              title: Text("Profile"),
+              leading: const Icon(Icons.person),
+              title: const Text("Profile"),
               onTap: (){MySnackBar("Home", context);},
             ),
             ListTile(
-              leading: Icon(Icons.phone),
-              title: Text("Contact"),
+              leading: const Icon(Icons.phone),
+              title: const Text("Contact"),
               onTap: (){MySnackBar("Home", context);},
             ),
             ListTile(
-              leading: Icon(Icons.email),
-              title: Text("Email"),
+              leading: const Icon(Icons.email),
+              title: const Text("Email"),
               onTap: (){MySnackBar("Home", context);},
             ),
           ],
