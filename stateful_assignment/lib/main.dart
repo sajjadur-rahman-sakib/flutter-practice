@@ -264,7 +264,7 @@ class _HomePageState extends State<HomePage> {
                 child: Icon(Icons.more_vert_outlined, color: Colors.grey),
               ),
               Padding(
-                padding: const EdgeInsets.only(top: 30, left: 20),
+                padding: const EdgeInsets.only(top: 30, left: 10),
                 child: Text(
                   "$price\$",
                   style: const TextStyle(fontSize: 18),
@@ -286,7 +286,7 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
       content: Text(
-        "You Have added\n 5\n $item on your bag!",
+        "                 You Have added\n                               5\n              $item on your bag!",
         style: const TextStyle(fontSize: 18),
       ),
       actions: [
