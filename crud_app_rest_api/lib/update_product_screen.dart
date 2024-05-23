@@ -18,7 +18,8 @@ class _UpdateProductScreenState extends State<UpdateProductScreen> {
   final TextEditingController _quantityTEController = TextEditingController();
   final TextEditingController _totalPriceTEController = TextEditingController();
   final TextEditingController _imageTEController = TextEditingController();
-  final TextEditingController _productCodeTEController = TextEditingController();
+  final TextEditingController _productCodeTEController =
+      TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   bool _updateProductInProgress = false;
 
@@ -50,9 +51,7 @@ class _UpdateProductScreenState extends State<UpdateProductScreen> {
                   controller: _nameTEController,
                   autovalidateMode: AutovalidateMode.onUserInteraction,
                   decoration: const InputDecoration(
-                      hintText: 'Name',
-                      labelText: 'Name'
-                  ),
+                      hintText: 'Name', labelText: 'Name'),
                   validator: (String? value) {
                     if (value == null || value.trim().isEmpty) {
                       return 'Write your product name';
@@ -78,9 +77,7 @@ class _UpdateProductScreenState extends State<UpdateProductScreen> {
                   controller: _unitPriceTEController,
                   keyboardType: TextInputType.number,
                   decoration: const InputDecoration(
-                      hintText: 'Unit Price',
-                      labelText: 'Unit Price'
-                  ),
+                      hintText: 'Unit Price', labelText: 'Unit Price'),
                   validator: (String? value) {
                     if (value == null || value.trim().isEmpty) {
                       return 'Write your unit price';
@@ -93,9 +90,7 @@ class _UpdateProductScreenState extends State<UpdateProductScreen> {
                   controller: _quantityTEController,
                   keyboardType: TextInputType.number,
                   decoration: const InputDecoration(
-                      hintText: 'Quantity',
-                      labelText: 'Quantity'
-                  ),
+                      hintText: 'Quantity', labelText: 'Quantity'),
                   validator: (String? value) {
                     if (value == null || value.trim().isEmpty) {
                       return 'Write your quantity';
@@ -108,9 +103,7 @@ class _UpdateProductScreenState extends State<UpdateProductScreen> {
                   controller: _totalPriceTEController,
                   keyboardType: TextInputType.number,
                   decoration: const InputDecoration(
-                      hintText: 'Total Price',
-                      labelText: 'Total Price'
-                  ),
+                      hintText: 'Total Price', labelText: 'Total Price'),
                   validator: (String? value) {
                     if (value == null || value.trim().isEmpty) {
                       return 'Write your total price';
@@ -122,9 +115,7 @@ class _UpdateProductScreenState extends State<UpdateProductScreen> {
                 TextFormField(
                   controller: _imageTEController,
                   decoration: const InputDecoration(
-                      hintText: 'Image',
-                      labelText: 'Image'
-                  ),
+                      hintText: 'Image', labelText: 'Image'),
                   validator: (String? value) {
                     if (value == null || value.trim().isEmpty) {
                       return 'Write your image';
@@ -168,14 +159,17 @@ class _UpdateProductScreenState extends State<UpdateProductScreen> {
       "UnitPrice": _unitPriceTEController.text
     };
 
-    String updateProductUrl = 'https://crud.teamrabbil.com/api/v1/UpdateProduct/${widget.product.id}';
+    String updateProductUrl =
+        'https://crud.teamrabbil.com/api/v1/UpdateProduct/${widget.product.id}';
 
     Uri uri = Uri.parse(updateProductUrl);
-    Response response = await post(uri, headers: {'content-type' : 'application/json'}, body: jsonEncode(inputData));
+    Response response = await post(uri,
+        headers: {'content-type': 'application/json'},
+        body: jsonEncode(inputData));
 
     print(response.statusCode);
     print(response.body);
-    
+
     if (response.statusCode == 200) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Product has been updated')),
@@ -186,7 +180,6 @@ class _UpdateProductScreenState extends State<UpdateProductScreen> {
         const SnackBar(content: Text('Update product failed! Try again.')),
       );
     }
-
   }
 
   @override

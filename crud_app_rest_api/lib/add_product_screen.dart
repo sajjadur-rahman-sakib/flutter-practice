@@ -15,7 +15,8 @@ class _AddProductScreenState extends State<AddProductScreen> {
   final TextEditingController _unitPriceTEController = TextEditingController();
   final TextEditingController _quantityTEController = TextEditingController();
   final TextEditingController _totalPriceTEController = TextEditingController();
-  final TextEditingController _productCodeTEController = TextEditingController();
+  final TextEditingController _productCodeTEController =
+      TextEditingController();
   final TextEditingController _imageTEController = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   bool _addNewProductInProgress = false;
@@ -110,19 +111,19 @@ class _AddProductScreenState extends State<AddProductScreen> {
                   },
                 ),
                 const SizedBox(height: 16),
-                  Visibility(
-                      visible: _addNewProductInProgress == false,
-                      replacement: Center(
-                        child: CircularProgressIndicator(),
-                      ),
-                      child: ElevatedButton(
-                    onPressed: () {
-                      if (_formKey.currentState!.validate()) {
-                        _addProduct();
-                      }
-                    },
-                    child: const Text('Add'),
-                  ))
+                Visibility(
+                    visible: _addNewProductInProgress == false,
+                    replacement: const Center(
+                      child: CircularProgressIndicator(),
+                    ),
+                    child: ElevatedButton(
+                      onPressed: () {
+                        if (_formKey.currentState!.validate()) {
+                          _addProduct();
+                        }
+                      },
+                      child: const Text('Add'),
+                    ))
               ],
             ),
           ),
@@ -135,7 +136,8 @@ class _AddProductScreenState extends State<AddProductScreen> {
     _addNewProductInProgress = true;
     setState(() {});
 
-    const String addNewProductUrl = 'https://crud.teamrabbil.com/api/v1/CreateProduct';
+    const String addNewProductUrl =
+        'https://crud.teamrabbil.com/api/v1/CreateProduct';
 
     Map<String, dynamic> inputData = {
       "Img": _imageTEController.text.trim(),
@@ -147,16 +149,16 @@ class _AddProductScreenState extends State<AddProductScreen> {
     };
 
     Uri uri = Uri.parse(addNewProductUrl);
-    Response response = await post(uri, body: jsonEncode(inputData), headers: {
-      'content-type' : 'application/json'
-    });
+    Response response = await post(uri,
+        body: jsonEncode(inputData),
+        headers: {'content-type': 'application/json'});
     print(response.statusCode);
     print(response.body);
     print(response.headers);
     _addNewProductInProgress = false;
     setState(() {});
 
-    if(response.statusCode == 200) {
+    if (response.statusCode == 200) {
       _nameTEController.clear();
       _unitPriceTEController.clear();
       _productCodeTEController.clear();
@@ -164,10 +166,11 @@ class _AddProductScreenState extends State<AddProductScreen> {
       _totalPriceTEController.clear();
       _imageTEController.clear();
 
-      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("New Product Added")));
-    }
-    else {
-      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Add New Product Failed")));
+      ScaffoldMessenger.of(context)
+          .showSnackBar(const SnackBar(content: Text("New Product Added")));
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text("Add New Product Failed")));
     }
   }
 

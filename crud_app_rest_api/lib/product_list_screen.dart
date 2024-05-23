@@ -2,7 +2,6 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:crud_app_rest_api/add_product_screen.dart';
-import 'package:crud_app_rest_api/product.dart';
 import 'package:crud_app_rest_api/product_model.dart';
 import 'package:crud_app_rest_api/update_product_screen.dart';
 import 'package:flutter/material.dart';
