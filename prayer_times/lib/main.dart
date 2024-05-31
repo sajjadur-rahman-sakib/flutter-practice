@@ -1,6 +1,4 @@
 import 'dart:convert';
-
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:prayer_times/data.dart';
@@ -37,20 +35,22 @@ class _HomeState extends State<Home> {
     getPTData();
     super.initState();
   }
-  late Data list;
+  late final Data list;
   final String url = 'http://api.aladhan.com/v1/timingsByCity?city=Dhaka&country=Bangladesh&method=4';
 
   Future getPTData() async {
     http.Response response = await http.get(Uri.parse(url));
-    final data = jsonDecode(response.body);
 
-    list = Data.fromJson(data);
+    if(response.statusCode == 200) {
+      final data = jsonDecode(response.body);
 
-    if (kDebugMode) {
-      print(list.data.timings.asr);
+      list = Data.fromJson(data);
+
+      return data;
     }
-
-    return data;
+    else{
+      return 'No Data Found';
+    }
   }
 
   @override
