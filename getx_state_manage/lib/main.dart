@@ -25,7 +25,8 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  CounterController counterController = CounterController();
+  // final CounterController counterController = CounterController();
+  final CounterController counterController = Get.put(CounterController());
 
   @override
   Widget build(BuildContext context) {
@@ -38,15 +39,21 @@ class _HomeState extends State<Home> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Obx(() {
-              return Text("Total Count : ${counterController.count}",);
+            // Obx(() {
+            //   return Text("Total Count : ${counterController.count}",);
+            // })
+
+            GetBuilder<CounterController>(builder: (counterController) {
+              return Text(
+                "Total Count : ${counterController.count}",
+              );
             })
           ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: counterController.incrementCount,
-         child: const Icon(Icons.add),
+        child: const Icon(Icons.add),
       ),
     );
   }
