@@ -11,28 +11,43 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   final FirestoreService firestoreService = FirestoreService();
-  final TextEditingController textEditingController = TextEditingController();
+  final TextEditingController nameTEController = TextEditingController();
+  final TextEditingController ageTEController = TextEditingController();
+  final TextEditingController locationTEController = TextEditingController();
 
   void openNoteBox({String? docId}) {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        content: TextField(
-          controller: textEditingController,
+        content: Column(
+          children: [
+            TextField(
+              controller: nameTEController,
+            ),
+            TextField(
+              controller: ageTEController,
+            ),
+            TextField(
+              controller: locationTEController,
+            ),
+          ],
         ),
         actions: [
           ElevatedButton(
               onPressed: () {
                 if (docId == null) {
-                  firestoreService.addNote(textEditingController.text);
+                  firestoreService.addNote(nameTEController.text,
+                      ageTEController.text, locationTEController.text);
                 } else {
-                  firestoreService.updateNote(
-                      docId, textEditingController.text);
+                  firestoreService.updateNote(docId, nameTEController.text,
+                      ageTEController.text, locationTEController.text);
                 }
                 Navigator.pop(context);
-                textEditingController.clear();
+                nameTEController.clear();
+                ageTEController.clear();
+                locationTEController.clear();
               },
-              child: const Text("Text"))
+              child: const Text("Submit"))
         ],
       ),
     );
@@ -52,8 +67,8 @@ class _HomeState extends State<Home> {
       body: StreamBuilder<QuerySnapshot>(
         stream: firestoreService.getNotes(),
         builder: (context, snapshot) {
-          if (snapshot.hasData) {
-            List noteList = snapshot.data!.docs;
+          if (!snapshot.hasData) {
+            List<DocumentSnapshot> noteList = snapshot.data!.docs;
 
             return ListView.builder(
               itemCount: noteList.length,
@@ -64,14 +79,19 @@ class _HomeState extends State<Home> {
                 Map<String, dynamic> data =
                     documentSnapshot.data() as Map<String, dynamic>;
 
-                String noteText = data['note'];
-
                 return Container(
-                  height: 50,
+                  height: 80,
                   width: MediaQuery.of(context).size.width,
                   padding: const EdgeInsets.all(10),
                   child: ListTile(
-                    title: Text(noteText),
+                    title: Text(data['name']),
+                    subtitle: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Text(data['age']),
+                        Text(data['location']),
+                      ],
+                    ),
                     trailing: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
