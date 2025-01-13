@@ -14,9 +14,10 @@ class FirestoreService {
     return notes.doc(docId).delete();
   }
 
-  Future<void> addNote(String name, String age, String location) {
+  Future<void> addNote(String image, String name, String age, String location) {
     debugPrint('Added Successful');
     return notes.add({
+      'image': image,
       'name': name,
       'age': age,
       'location': location,
@@ -24,8 +25,9 @@ class FirestoreService {
     });
   }
 
-  Future<void> updateNote(String docID, String name, String age, String location) {
+  Future<void> updateNote(String docID, String image, String name, String age, String location) {
     return notes.doc(docID).update({
+      'image': image,
       'name': name,
       'age': age,
       'location': location,
