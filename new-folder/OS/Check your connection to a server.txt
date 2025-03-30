@@ -1,1 +1,0 @@
-ping server_address
